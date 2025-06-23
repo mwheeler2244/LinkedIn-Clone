@@ -105,3 +105,22 @@ export interface StoredUser {
   password: string;
   userData: User;
 }
+
+export interface JobListing {
+  id: string;
+  title: string;
+  company: string;
+  location: string;
+  type: string;
+  description: string;
+  tags: string[];
+}
+
+export interface Person {
+  id: string;
+  name: string;
+  title: string;
+  avatar: string;
+  company: string;
+  location: string;
+}

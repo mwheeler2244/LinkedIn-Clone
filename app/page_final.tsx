@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 // Import all our components
 import LandingPage from "../components/pages/LandingPage";

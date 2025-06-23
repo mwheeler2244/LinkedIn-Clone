@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Search,
   Home,
@@ -14,7 +14,6 @@ import {
   MapPin,
   ChevronRight,
   Building,
-  MoreHorizontal,
   ThumbsUp,
   MessageCircle,
   Share,
@@ -24,32 +23,18 @@ import {
   ChevronDown,
   Info,
   Star,
-  UserPlus,
-  Eye,
   LogOut,
   Settings,
   HelpCircle,
-  Edit,
-  Phone,
-  Mail,
-  Calendar,
-  Award,
-  BookOpen,
-  Briefcase as BriefcaseIcon,
-  UserCheck,
-  UserX,
-  Clock,
   Menu,
   Bookmark,
+  Calendar,
+  type LucideIcon,
 } from "lucide-react";
 
 // Import all our components
 import LandingPage from "../components/pages/LandingPage";
 import ProfilePage from "../components/pages/ProfilePage";
-import LoginModal from "../components/modals/LoginModal";
-import SignupModal from "../components/modals/SignupModal";
-import Toast from "../components/ui/Toast";
-import Header from "../components/layout/Header";
 
 // Import types
 import {
@@ -61,6 +46,8 @@ import {
   Conversation,
   User,
   StoredUser,
+  JobListing,
+  Person,
 } from "../types";
 
 export default function NetworX() {
@@ -128,8 +115,8 @@ export default function NetworX() {
   const [searchResults, setSearchResults] = useState<{
     posts: Post[];
     connections: Connection[];
-    jobs: any[];
-    people: any[];
+    jobs: JobListing[];
+    people: Person[];
   }>({
     posts: [],
     connections: [],
@@ -240,7 +227,14 @@ export default function NetworX() {
           conv.participant.name.toLowerCase().includes(lowercaseTerm) ||
           conv.participant.title.toLowerCase().includes(lowercaseTerm)
       )
-      .map((conv) => conv.participant);
+      .map((conv) => ({
+        id: conv.participant.id,
+        name: conv.participant.name,
+        title: conv.participant.title,
+        avatar: conv.participant.avatar,
+        company: "Company",
+        location: "Location",
+      }));
 
     const registeredPeople = registeredUsers
       .filter(
@@ -251,7 +245,14 @@ export default function NetworX() {
           (user.userData.location &&
             user.userData.location.toLowerCase().includes(lowercaseTerm))
       )
-      .map((user) => user.userData);
+      .map((user, index) => ({
+        id: `user-${index}`,
+        name: user.userData.name,
+        title: user.userData.title,
+        avatar: user.userData.avatar,
+        company: user.userData.company,
+        location: user.userData.location || "Location",
+      }));
 
     const allPeople = [...filteredPeople, ...registeredPeople].filter(
       (person, index, self) =>
@@ -2047,7 +2048,7 @@ export default function NetworX() {
     tabKey,
     count,
   }: {
-    icon: any;
+    icon: LucideIcon;
     label: string;
     tabKey: string;
     count?: number;
@@ -2245,7 +2246,7 @@ export default function NetworX() {
                       searchResults.connections.length === 0 && (
                         <div className="p-4 text-center">
                           <p className="text-sm text-gray-500">
-                            No results found for "{searchTerm}"
+                            No results found for &quot;{searchTerm}&quot;
                           </p>
                         </div>
                       )}
