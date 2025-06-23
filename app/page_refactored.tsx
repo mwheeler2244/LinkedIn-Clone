@@ -4,9 +4,21 @@ import { useState } from "react";
 // Import all our components
 import LandingPage from "../components/pages/LandingPage";
 import ProfilePage from "../components/pages/ProfilePage";
+import LoginModal from "../components/modals/LoginModal";
+import SignupModal from "../components/modals/SignupModal";
+import Toast from "../components/ui/Toast";
 
 // Import types
-import { Post, User, StoredUser } from "../types";
+import {
+  Post,
+  Comment,
+  NewsItem,
+  Connection,
+  Message,
+  Conversation,
+  User,
+  StoredUser,
+} from "../types";
 
 export default function NetworX() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
