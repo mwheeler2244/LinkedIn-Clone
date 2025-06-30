@@ -4,6 +4,9 @@ Networx is a modern professional networking platform inspired by LinkedIn. Built
 
 ---
 
+
+👉 [Launch the Live App](https://linked-in-clone-3wbb.vercel.app/)
+
 ## 🚀 Features
 
 - 🔐 User authentication (email and/or social login)
